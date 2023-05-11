@@ -43,11 +43,7 @@ namespace JogoDaForca1.WinApp
 
         private void PreencherPalavra()
         {
-            textoForca.Text = string.Empty;
-            foreach (var item in forca.PalavraParcial)
-            {
-                textoForca.Text += item.ToString() + " ";
-            }
+                textoForca.Text = string.Join("  ", forca.letrasEncontradas);
         }
 
 

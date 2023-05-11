@@ -9,20 +9,9 @@ namespace JogoDaForca1.WinApp
 {
     public class Forca
     {
-        public string PalavraParcial
-        {
-            get { return new string(letrasEncontradas); }
-        }
-
-        public int Erros
-        {
-            get { return erros; }
-        }
-
         public string mensagemFinal;
-
         private string palavraSecreta;
-        public char[] letrasEncontradas;
+        public List<char> letrasEncontradas;
         private int erros;
 
         public Forca()
@@ -50,7 +39,7 @@ namespace JogoDaForca1.WinApp
             if (letraFoiEncontrada == false)
                 erros++;
 
-            bool jogadorAcertou = new string(letrasEncontradas) == palavraSecreta;
+            bool jogadorAcertou = new string(letrasEncontradas.ToArray()) == palavraSecreta;
 
             if (jogadorAcertou)
                 mensagemFinal = $"Você acertou a palavra {palavraSecreta}, parabéns!";
@@ -68,7 +57,8 @@ namespace JogoDaForca1.WinApp
 
         private string ObterPalavraSecreta()
         {
-            string[] palavras = {
+            List<string> palavras = new List<string> 
+            {
                 "ABACATE",
                 "ABACAXI",
                 "ACEROLA",
@@ -101,17 +91,17 @@ namespace JogoDaForca1.WinApp
                 "UVAIA"
             };
 
-            int indiceAleatorio = new Random().Next(palavras.Length);
+            int indiceAleatorio = new Random().Next(palavras.Count);
 
             return palavras[indiceAleatorio];
         }
 
-        private char[] PopularLetrasEncontradas(int tamanho)
+        private List<char> PopularLetrasEncontradas(int tamanho)
         {
-            char[] letrasEncontradas = new char[tamanho];
+            List<char> letrasEncontradas = new List<char>();
 
-            for (int carectere = 0; carectere < letrasEncontradas.Length; carectere++)
-                letrasEncontradas[carectere] = '_';
+            for (int carectere = 0; carectere < tamanho; carectere++)
+                letrasEncontradas.Add('_');
 
             return letrasEncontradas;
         }
